@@ -1,4 +1,4 @@
-import 'package:ambev_flutter/app/global/widgets/rounded_buton.dart';
+import 'package:ambev_flutter/app/global/widgets/rounded_button.dart';
 import 'package:ambev_flutter/app/global/widgets/rounded_input_field.dart';
 import 'package:ambev_flutter/app/global/widgets/rounded_password_field.dart';
 import 'package:ambev_flutter/app/modules/login/login_controller.dart';
