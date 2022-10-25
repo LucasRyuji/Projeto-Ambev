@@ -15,13 +15,14 @@ class LoginController extends GetxController {
   final box = GetStorage();
 
   void login() async {
-    print('po');
     if (formKey.currentState!.validate()) {
       loading.value = true;
       auth = await repository.login(usernameCtrl.text, passwordCtrl.text);
       if (!(auth.accessToken == null)) {
         box.write('auth', auth);
-        print(auth);
+        if (auth.user?.accessLevelId == 1) {
+          Get.offAllNamed('/users');
+        }
       }
       loading.value = false;
     }

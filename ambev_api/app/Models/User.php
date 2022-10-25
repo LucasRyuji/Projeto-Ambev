@@ -14,13 +14,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string|null $email
  * @property string $username
  * @property string $password
  * @property bool $active
+ * @property int $access_level_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -48,7 +49,13 @@ class User extends Authenticatable implements JWTSubject
 		'username',
 		'password',
 		'active',
+        'access_level_id',
 	];
+
+    public function access_level()
+    {
+        return $this->belongTo(AccessLevel::class, 'access_level_id');
+    }
 
 	public function getJWTIdentifier()
     {

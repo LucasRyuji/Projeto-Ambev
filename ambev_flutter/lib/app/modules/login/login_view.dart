@@ -20,10 +20,12 @@ class LoginView extends GetView<LoginController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   "Entrar",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
                 SizedBox(height: Get.height * 0.03),
                 SvgPicture.asset(
@@ -58,13 +60,13 @@ class LoginView extends GetView<LoginController> {
                 Obx(() => Visibility(
                       visible: controller.loading.value,
                       child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
                         width: Get.width * 0.8,
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
+                            children: const <Widget>[
                               CircularProgressIndicator(),
                             ],
                           ),

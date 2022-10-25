@@ -1,5 +1,4 @@
 import 'package:ambev_flutter/app/modules/initial/initial_controller.dart';
-import 'package:ambev_flutter/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -12,7 +11,7 @@ class InitialPage extends GetView<InitialController> {
         children: <Widget>[
           SplashScreen(
             seconds: 5,
-            gradientBackground: LinearGradient(
+            gradientBackground: const LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [

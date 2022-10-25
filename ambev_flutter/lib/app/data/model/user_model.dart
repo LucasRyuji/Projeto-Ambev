@@ -4,9 +4,10 @@ class User {
   String? email;
   String? username;
   bool? active;
-  Null? createdAt;
-  Null? updatedAt;
-  Null? deletedAt;
+  int? accessLevelId;
+  String? createdAt;
+  String? updatedAt;
+  String? deletedAt;
 
   User(
       {this.id,
@@ -20,6 +21,7 @@ class User {
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    accessLevelId = json['access_level_id'];
     name = json['name'];
     email = json['email'];
     username = json['username'];
@@ -30,15 +32,16 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['username'] = this.username;
-    data['active'] = this.active;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
+    Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['username'] = username;
+    data['access_level_id'] = accessLevelId;
+    data['active'] = active;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }

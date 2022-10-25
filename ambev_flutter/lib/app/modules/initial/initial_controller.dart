@@ -10,7 +10,10 @@ class InitialController extends GetxController {
     if (box.read('auth') != null) {
       Auth auth = Auth.fromJson(box.read('auth'));
       if (auth.accessToken != null) {
-        return Routes.HOME;
+        if (auth.user?.accessLevelId == 1) {
+          return Routes.USERS;
+        }
+        return Routes.LOGIN;
       }
     } else {
       return Routes.LOGIN;

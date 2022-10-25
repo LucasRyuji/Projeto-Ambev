@@ -14,7 +14,7 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    
+
     public function login()
     {
         $credentials = request(['username', 'password']);
@@ -31,6 +31,8 @@ class AuthController extends Controller
         if(!$user){
             $user = new User();
             $user->username = $request->username;
+            $user->name = $request->name;
+            $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->active = 1;
             $user->save();
@@ -40,13 +42,13 @@ class AuthController extends Controller
             return response()->json(['message '=> 'Nome de Usuário já está em uso'], 401);
         }
     }
-  
+
     public function me()
     {
         return response()->json(auth()->user());
     }
 
-   
+
     public function logout()
     {
         auth()->logout();
@@ -54,13 +56,13 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-   
+
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
     }
 
-    
+
     protected function respondWithToken($token)
     {
         return response()->json([

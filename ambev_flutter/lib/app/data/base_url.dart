@@ -1,1 +1,1 @@
-const baseUrl = 'http://192.168.15.93:9000/flutter_laravel/ambev_api/api';
+const baseUrl = 'https://89c6-179-48-116-246.sa.ngrok.io/Projeto-Ambev/ambev_api/api';
