@@ -19,6 +19,10 @@ Route::group(['middleware' => 'api'], function ($router){
     Route::get('/', function () {
         return response()->json(['Aoba' => 'aiba']);
     });
+    Route::post('users/create', [UserController::class, 'create']);
+    Route::delete('users/{id}/delete', [UserController::class, 'delete']);
+    Route::get('users/paginate', [UserController::class, 'paginate']);
+
     Route::get('access-levels/get', [AccessLevelsController::class, 'get']);
 
     Route::post('login', [AuthController::class, 'login']);

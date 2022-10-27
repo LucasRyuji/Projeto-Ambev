@@ -7,11 +7,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
 /**
  * Class User
  *
@@ -30,34 +30,34 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable implements JWTSubject
 {
-	use SoftDeletes;
-	use Notifiable;
+    use SoftDeletes;
+    use Notifiable;
 
-	protected $table = 'users';
+    protected $table = 'users';
 
-	protected $casts = [
-		'active' => 'bool'
-	];
+    protected $casts = [
+        'active' => 'bool',
+    ];
 
-	protected $hidden = [
-		'password',
-	];
+    protected $hidden = [
+        'password',
+    ];
 
-	protected $fillable = [
-		'name',
-		'email',
-		'username',
-		'password',
-		'active',
+    protected $fillable = [
+        'name',
+        'email',
+        'username',
+        'password',
+        'active',
         'access_level_id',
-	];
+    ];
 
     public function access_level()
     {
         return $this->belongTo(AccessLevel::class, 'access_level_id');
     }
 
-	public function getJWTIdentifier()
+    public function getJWTIdentifier()
     {
         return $this->getKey();
     }
@@ -72,4 +72,3 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 }
-

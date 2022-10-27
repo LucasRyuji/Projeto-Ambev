@@ -9,6 +9,8 @@ class AccessLevelRepository {
 
     var response = await api.get();
 
+    print(response);
+
     accessLevels.addAll(List.from(response['access_levels'].map((a) => AccessLevel.fromJson(a))));
 
     return accessLevels;
