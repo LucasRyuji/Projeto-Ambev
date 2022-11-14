@@ -8,6 +8,7 @@ class UsersController extends GetxController {
   var userRepository = UserRepository();
 
   late ScrollController scrollController;
+  var nameController = TextEditingController();
 
   var users = <User>[].obs;
 
@@ -26,6 +27,7 @@ class UsersController extends GetxController {
 
     await getUsers();
   }
+
   _scrollListener() async {
     if (totalData == users.length) {
       return;
@@ -37,26 +39,70 @@ class UsersController extends GetxController {
   }
 
   delete(User user, BuildContext context) async {
-    var data = await Helpers.confirm(title: 'Tem certeza?', message: 'Deseja mesmo excluir esse usuário?', backText: 'Cancelar', confirmColor: Colors.redAccent, confirmText: 'Confirmar', context: context);
+    var data = await Helpers.confirm(
+        title: 'Tem certeza?',
+        message: 'Deseja mesmo excluir esse usuário?',
+        backText: 'Cancelar',
+        confirmColor: Colors.redAccent,
+        confirmText: 'Confirmar',
+        context: context);
 
     if (data == true) {
       var response = await userRepository.delete(user);
 
       if (response?['error'] == false) {
         users.remove(user);
-        Helpers.toast(title: 'Removido com sucesso', message: 'Usuário removido com successo.', backgroundColor: Colors.green);
+        Helpers.toast(
+            title: 'Removido com sucesso',
+            message: 'Usuário removido com successo.',
+            backgroundColor: Colors.green);
       }
     }
   }
 
-  getUsers() async {
-    if (page > 1) {
+  edit(User user) async {
+    var response = await Get.toNamed('/users/edit', arguments: {
+      'user': user,
+    });
+
+    if (response != null && response is User) {
+      Helpers.toast(
+        title: 'Usuário alterado',
+        message: 'Usuário alterado com sucesso.',
+        backgroundColor: Colors.green,
+      );
+      await getUsers(refresher: true);
+    }
+  }
+
+  create() async {
+    var response = await Get.toNamed('/users/create');
+
+    if (response != null && response is User) {
+      Helpers.toast(
+        title: 'Usuário criado',
+        message: 'Usuário criado com sucesso',
+        backgroundColor: Colors.green,
+      );
+      await getUsers(refresher: true);
+    }
+  }
+
+  getUsers({
+    bool refresher = false,
+  }) async {
+    if (page > 1 || refresher == true) {
+      if (refresher == true) {
+        page = 1;
+        users.clear();
+      }
       loadingPagination.value = true;
     }
 
     var response = await userRepository.get({
       'take': take,
       'page': page,
+      'name': nameController.text,
     });
 
     if (response != null) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,11 +26,37 @@ class UserController extends Controller
 
     public function paginate(Request $request)
     {
-        $users = User::paginate($request->take);
+        $users = User::where('name', 'LIKE', '%' . $request->name . '%')->paginate($request->take);
 
         return response()->json([
             'users' => $users,
         ]);
+    }
+
+    public function edit($id, Request $request)
+    {
+        info($id);
+        info($request);
+
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message '=> 'Usuário não encontrado'], 401);
+        }
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'access_level_id' => $request->access_level_id,
+        ];
+
+        if (isset($request->password) && $request->password != '') {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return response()->json(['message' => 'User edit succcessfully.','user' => $user]);
     }
 
     public function create(Request $request)

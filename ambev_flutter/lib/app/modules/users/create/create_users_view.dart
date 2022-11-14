@@ -1,9 +1,10 @@
 import 'package:ambev_flutter/app/global/helpers/app_colors.dart';
 import 'package:ambev_flutter/app/global/helpers/app_styles.dart';
-import 'package:ambev_flutter/app/modules/create_users/create_users_controller.dart';
+import 'package:ambev_flutter/app/modules/users/create/create_users_controller.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CreateUsersPage extends GetView<CreateUsersController> {
   @override
@@ -150,18 +151,48 @@ class CreateUsersPage extends GetView<CreateUsersController> {
                                                 BorderRadius.circular(8),
                                           ),
                                           height: 40,
-                                          width:
-                                              MediaQuery.of(context).size.width -
-                                                  40,
-                                          child: const Center(
-                                            child: Text(
-                                              'SALVAR',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              40,
+                                          child: Center(
+                                              child: Obx(
+                                            () => Stack(
+                                              children: [
+                                                if (controller.loading.isFalse)
+                                                  const Text(
+                                                    'SALVAR',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                if (controller.loading.isTrue)
+                                                  RichText(
+                                                    text: TextSpan(
+                                                        text: 'AGUARDE ',
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                        children: [
+                                                          WidgetSpan(
+                                                            alignment: PlaceholderAlignment.middle,
+                                                            child:
+                                                                LoadingAnimationWidget
+                                                                    .inkDrop(
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 16,
+                                                            ),
+                                                          )
+                                                        ]),
+                                                  )
+                                              ],
                                             ),
-                                          ),
+                                          )),
                                         ),
                                       )
                                     ],

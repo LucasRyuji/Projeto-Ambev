@@ -12,6 +12,8 @@ class InitialController extends GetxController {
       if (auth.accessToken != null) {
         if (auth.user?.accessLevelId == 1) {
           return Routes.USERS;
+        } else if (auth.user?.accessLevelId == 3) {
+          return Routes.TABS_ANALISTA;
         }
         return Routes.LOGIN;
       }

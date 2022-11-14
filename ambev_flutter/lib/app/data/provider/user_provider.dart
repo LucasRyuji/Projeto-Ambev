@@ -14,8 +14,6 @@ class UserApiClient {
       var response = await httpClient
           .delete(Uri.parse("$baseUrl/users/${user.id}/delete"));
 
-        print(response.statusCode);
-
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
@@ -45,8 +43,6 @@ class UserApiClient {
         "$baseUrl/users/paginate$wheresString",
       ));
 
-      print(response.statusCode);
-
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
@@ -59,7 +55,7 @@ class UserApiClient {
     } catch (e) {
       Helpers.toast(
         title: 'Erro',
-        message: 'Erro ao criar usuário.',
+        message: 'Erro ao recuperar usuários.',
         backgroundColor: Colors.redAccent,
       );
     }
@@ -86,6 +82,34 @@ class UserApiClient {
       Helpers.toast(
         title: 'Erro',
         message: 'Erro ao criar usuário.',
+        backgroundColor: Colors.redAccent,
+      );
+    }
+
+    return null;
+  }
+
+  Future<Map<String, dynamic>?> update(User user) async {
+    try {
+      var response = await httpClient.post(
+        Uri.parse("$baseUrl/users/${user.id}/edit"),
+        body: jsonEncode(user.toJson()),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        Helpers.toast(
+          title: 'Erro',
+          message: 'Erro ao editar usuário.',
+          backgroundColor: Colors.redAccent,
+        );
+      }
+    } catch (e) {
+      Helpers.toast(
+        title: 'Erro',
+        message: 'Erro ao editar usuário.',
         backgroundColor: Colors.redAccent,
       );
     }

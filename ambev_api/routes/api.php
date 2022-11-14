@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware' => 'api'], function ($router){
-    Route::get('/', function () {
-        return response()->json(['Aoba' => 'aiba']);
+    Route::get('/', function (Request $request) {
+        return response()->json(['password' => bcrypt($request->password)]);
     });
     Route::post('users/create', [UserController::class, 'create']);
+    Route::post('users/{id}/edit', [UserController::class, 'edit']);
     Route::delete('users/{id}/delete', [UserController::class, 'delete']);
     Route::get('users/paginate', [UserController::class, 'paginate']);
 

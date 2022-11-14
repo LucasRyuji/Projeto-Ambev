@@ -1,5 +1,5 @@
 const baseUrl =
-    'https://a583-179-48-116-71.sa.ngrok.io/Projeto-Ambev/ambev_api/api';
+    'https://66b7-2804-7638-4129-7e00-f56d-9261-13d9-b0c.sa.ngrok.io/Projeto-Ambev/ambev_api/api';
 const headers = {
   "Content-type": "application/json",
   "Accept": "application/json",

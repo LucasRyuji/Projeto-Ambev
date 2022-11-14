@@ -12,52 +12,55 @@ import 'widgets/background.dart';
 class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Background(
-        child: SingleChildScrollView(
-          child: Form(
-            key: controller.formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  "Entrar",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: Background(
+          child: SingleChildScrollView(
+            child: Form(
+              key: controller.formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    "Entrar",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                SizedBox(height: Get.height * 0.03),
-                SvgPicture.asset(
-                  "assets/images/ambev.svg",
-                  height: Get.height * 0.09,
-                ),
-                SizedBox(height: Get.height * 0.03),
-                RoundedInputField(
-                  hintText: "Nome de Usuário",
-                  controller: controller.usernameCtrl,
-                  onChanged: (value) {},
-                ),
-                Obx(
-                  () => RoundedPasswordField(
-                    changeShowPassword: () => {
-                      controller.showPassword.value =
-                          !controller.showPassword.value,
-                    },
-                    showPassword: controller.showPassword.value,
-                    controller: controller.passwordCtrl,
+                  SizedBox(height: Get.height * 0.03),
+                  SvgPicture.asset(
+                    "assets/images/ambev.svg",
+                    height: Get.height * 0.09,
+                  ),
+                  SizedBox(height: Get.height * 0.03),
+                  RoundedInputField(
+                    hintText: "Nome de Usuário",
+                    controller: controller.usernameCtrl,
                     onChanged: (value) {},
                   ),
-                ),
-                Obx(() => Visibility(
-                      visible: !controller.loading.value,
-                      child: RoundedButton(
-                          text: "LOGIN",
-                          press: () {
-                            controller.login();
-                          }),
-                    )),
-                Obx(() => Visibility(
+                  Obx(
+                    () => RoundedPasswordField(
+                      changeShowPassword: () => {
+                        controller.showPassword.value =
+                            !controller.showPassword.value,
+                      },
+                      showPassword: controller.showPassword.value,
+                      controller: controller.passwordCtrl,
+                      onChanged: (value) {},
+                    ),
+                  ),
+                  Obx(() => Visibility(
+                        visible: !controller.loading.value,
+                        child: RoundedButton(
+                            text: "LOGIN",
+                            press: () {
+                              controller.login();
+                            }),
+                      )),
+                  Obx(
+                    () => Visibility(
                       visible: controller.loading.value,
                       child: Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
@@ -72,9 +75,10 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                       ),
-                    )),
-                AlreadyHaveAnAccountCheck(press: () {})
-              ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

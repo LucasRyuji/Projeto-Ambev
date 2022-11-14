@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -33,7 +34,8 @@ class AuthController extends Controller
             $user->username = $request->username;
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = bcrypt($request->password);
+            $user->access_level_id = $request->access_level_id;
+            $user->password = Hash::make($request->password);
             $user->active = 1;
             $user->save();
 
