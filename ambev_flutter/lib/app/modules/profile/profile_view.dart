@@ -120,37 +120,38 @@ class ProfilePage extends GetView<ProfileController> {
                                 return null;
                               },
                             ),
-                            Visibility(
-                              visible: controller.user.accessLevelId == 3,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Text(
-                                    'Nível de acesso',
-                                    style: TextStyle(
-                                      color: Color(0xff6C6C6C),
+                            if (controller.user != null)
+                              Visibility(
+                                visible: controller.user!.accessLevelId == 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
                                     ),
-                                  ),
-                                  TextFormField(
-                                    onTap: () =>
-                                        controller.showAccessLevelSelect(),
-                                    readOnly: true,
-                                    decoration: AppStyles.inputDecoration,
-                                    controller:
-                                        controller.accessLevelController,
-                                    validator: (dynamic value) {
-                                      if (value == null || value == '') {
-                                        return 'Nível de acesso é obrigatório';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
+                                    const Text(
+                                      'Nível de acesso',
+                                      style: TextStyle(
+                                        color: Color(0xff6C6C6C),
+                                      ),
+                                    ),
+                                    TextFormField(
+                                      onTap: () =>
+                                          controller.showAccessLevelSelect(),
+                                      readOnly: true,
+                                      decoration: AppStyles.inputDecoration,
+                                      controller:
+                                          controller.accessLevelController,
+                                      validator: (dynamic value) {
+                                        if (value == null || value == '') {
+                                          return 'Nível de acesso é obrigatório';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
                             const SizedBox(
                               height: 30,
                             ),
@@ -252,9 +253,7 @@ class ProfilePage extends GetView<ProfileController> {
                                           color: Colors.red,
                                         ),
                                       ),
-                                      TextSpan(
-                                        text: '  DESCONECTAR CONTA'
-                                      )
+                                      TextSpan(text: '  DESCONECTAR CONTA')
                                     ],
                                   ),
                                 ),

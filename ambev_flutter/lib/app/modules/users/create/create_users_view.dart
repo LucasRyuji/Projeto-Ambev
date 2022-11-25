@@ -2,6 +2,7 @@ import 'package:ambev_flutter/app/global/helpers/app_colors.dart';
 import 'package:ambev_flutter/app/global/helpers/app_styles.dart';
 import 'package:ambev_flutter/app/modules/users/create/create_users_controller.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -179,7 +180,9 @@ class CreateUsersPage extends GetView<CreateUsersController> {
                                                         ),
                                                         children: [
                                                           WidgetSpan(
-                                                            alignment: PlaceholderAlignment.middle,
+                                                            alignment:
+                                                                PlaceholderAlignment
+                                                                    .middle,
                                                             child:
                                                                 LoadingAnimationWidget
                                                                     .inkDrop(

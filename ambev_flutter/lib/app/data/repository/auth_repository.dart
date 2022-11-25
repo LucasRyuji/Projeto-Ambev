@@ -11,6 +11,6 @@ class AuthRepository {
 
   clearAuthUserStorate() async {
     final storage = GetStorage();
-    await storage.remove('authModel');
+    await storage.remove('auth');
   }
 }

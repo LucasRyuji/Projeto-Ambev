@@ -35,9 +35,6 @@ class UserController extends Controller
 
     public function edit($id, Request $request)
     {
-        info($id);
-        info($request);
-
         $user = User::find($id);
         if (!$user) {
             return response()->json(['message '=> 'Usuário não encontrado'], 401);
@@ -47,8 +44,13 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
+            'password' => $request->password,
             'access_level_id' => $request->access_level_id,
         ];
+
+        if ($request->password == null) {
+            unset($data['password']);
+        }
 
         if (isset($request->password) && $request->password != '') {
             $data['password'] = Hash::make($request->password);

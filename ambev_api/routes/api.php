@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['middleware' => 'api'], function ($router){
     Route::get('/', function (Request $request) {
-        return response()->json(['password' => bcrypt($request->password)]);
+        return response()->json(['password' => Hash::make($request->password)]);
     });
     Route::post('users/create', [UserController::class, 'create']);
     Route::post('users/{id}/edit', [UserController::class, 'edit']);
@@ -25,6 +26,11 @@ Route::group(['middleware' => 'api'], function ($router){
     Route::get('users/paginate', [UserController::class, 'paginate']);
 
     Route::get('access-levels/get', [AccessLevelsController::class, 'get']);
+
+    Route::post('orders/store', [OrderController::class, 'store']);
+    Route::put('orders/{id}/update', [OrderController::class, 'update']);
+    Route::get('orders/get', [OrderController::class, 'get']);
+    Route::get('orders/getFornecedor', [OrderController::class, 'getFornecedor']);
 
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);

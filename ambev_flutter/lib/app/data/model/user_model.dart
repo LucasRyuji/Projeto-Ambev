@@ -62,6 +62,7 @@ class User {
     data['name'] = name;
     data['email'] = email;
     data['username'] = username;
+    data['password'] = password;
     data['access_level_id'] = accessLevelId;
     data['active'] = active;
     data['created_at'] = createdAt;

@@ -20,12 +20,15 @@ class LoginController extends GetxController {
       auth = await repository.login(usernameCtrl.text, passwordCtrl.text);
       if (!(auth.accessToken == null)) {
         box.write('auth', auth);
-        print(auth);
+        print(auth.user?.accessLevelId);
         if (auth.user?.accessLevelId == 1) {
           Get.offAllNamed('/users');
         } else if (auth.user?.accessLevelId == 3) {
-          print('aaa');
           Get.offAllNamed('/tabs-analista');
+        } else if (auth.user?.accessLevelId == 2) {
+          Get.offAllNamed('/tabs-colaborador');
+        } else if (auth.user?.accessLevelId == 4) {
+          Get.offAllNamed('/tabs-fornecedor');
         }
       }
       loading.value = false;

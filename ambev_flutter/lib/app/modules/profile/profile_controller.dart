@@ -4,6 +4,7 @@ import 'package:ambev_flutter/app/data/model/user_model.dart';
 import 'package:ambev_flutter/app/data/repository/access_level_repository.dart';
 import 'package:ambev_flutter/app/data/repository/auth_repository.dart';
 import 'package:ambev_flutter/app/data/repository/user_repository.dart';
+import 'package:ambev_flutter/app/global/helpers/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_select/flutter_native_select.dart';
@@ -23,7 +24,7 @@ class ProfileController extends GetxController {
 
   var loading = true.obs;
 
-  late User user;
+  User? user;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -83,7 +84,7 @@ class ProfileController extends GetxController {
             onPressed: () {
               Get.back();
             },
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           )
         ],
       ),
@@ -97,15 +98,21 @@ class ProfileController extends GetxController {
   }
 
   getUser() async {
-    Auth auth = Auth.fromJson(GetStorage().read('auth'));
+    Auth auth = GetStorage().read('auth') is Auth
+        ? GetStorage().read('auth')
+        : Auth.fromJson(GetStorage().read('auth'));
     user = auth.user!;
   }
 
-  setData () async {
-    nameController.text = user.name!;
-    emailController.text = user.email!;
-    usernameController.text = user.username!;
-    accessLevelController.text = accessLevels.firstWhere((element) => element.id == user.accessLevelId!).name!;
+  setData() async {
+    nameController.text = user!.name!;
+    emailController.text = user!.email!;
+    usernameController.text = user!.username!;
+    accessLevelController.text = accessLevels
+        .firstWhere((element) => element.id == user!.accessLevelId!)
+        .name!;
+    selectedAccessLevel.value = accessLevels
+        .firstWhere((element) => element.id == user!.accessLevelId!);
   }
 
   void showAccessLevelSelect() async {
@@ -137,22 +144,18 @@ class ProfileController extends GetxController {
       loading.value = true;
 
       User? user = User(
-        id: this.user.id,
+        id: this.user!.id,
         name: nameController.text,
         email: emailController.text,
         username: usernameController.text,
-        password: passwordController.text.isEmpty ? null : passwordController.text,
+        password:
+            passwordController.text.isEmpty ? null : passwordController.text,
         accessLevelId: selectedAccessLevel.value?.id,
       );
 
       user = await userRepository.update(user);
 
-      if (user != null) {
-        Get.back(
-          result: user,
-          closeOverlays: true,
-        );
-      }
+      Helpers.toast(title: 'Atualizado com sucesso', message: 'Usuário atualizado com sucesso.', backgroundColor: Colors.green,);
 
       loading.value = false;
     }
