@@ -23,12 +23,6 @@ class OrdersFornecedorPage extends GetView<OrdersFornecedorController> {
               },
               icon: const Icon(Icons.refresh),
             ),
-            IconButton(
-              onPressed: () {
-                controller.create();
-              },
-              icon: const Icon(Icons.add_box),
-            )
           ],
         ),
         body: SingleChildScrollView(
@@ -152,7 +146,7 @@ class OrdersFornecedorPage extends GetView<OrdersFornecedorController> {
                                                       .format(order.date),
                                                 ),
                                                 Text(
-                                                  DateFormat('hh:mm')
+                                                  DateFormat('HH:mm')
                                                       .format(order.date),
                                                 ),
                                               ],

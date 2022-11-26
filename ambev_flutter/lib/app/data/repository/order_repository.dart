@@ -48,4 +48,18 @@ class OrderRepository {
 
     return orders;
   }
+
+  Future<List<OrderModel>> getAnalista (String type) async {
+    var response = await api.getAnalista(type);
+    var orders = <OrderModel>[];
+
+
+    if (response != null) {
+      for (var order in response['orders']) {
+        orders.add(OrderModel.fromJson(order));
+      }
+    }
+
+    return orders;
+  }
 }

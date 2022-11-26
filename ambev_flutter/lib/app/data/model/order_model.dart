@@ -39,7 +39,7 @@ class OrderModel {
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
-    var date = DateFormat('yyyy-MM-dd hh:mm:ss').parse(json['date']);
+    var date = DateFormat('yyyy-MM-dd HH:mm:ss').parse(json['date']);
     return OrderModel(
       id: json['id'],
       date: date,
@@ -61,7 +61,7 @@ class OrderModel {
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'date': DateFormat('yyyy-MM-dd hh:mm:ss').format(date),
+        'date': DateFormat('yyyy-MM-dd HH:mm:ss').format(date),
         'driver': driver,
         'car': car,
         'origin': origin,

@@ -11,4 +11,7 @@ abstract class Routes {
   static const ORDERS_FORNECEDOR = '/orders-fornecedor';
   static const CREATE_ORDER = '/create-order';
   static const ORDER_FORNECEDOR = '/order-details-fornecedor';
+  static const ORDERS_ANALISTA = '/orders-analista';
+  static const ORDER_ANALISTA = '/order-details-analista';
+  static const ORDER_COLABORADOR = '/order-details-colaborador';
 }

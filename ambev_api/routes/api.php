@@ -31,6 +31,7 @@ Route::group(['middleware' => 'api'], function ($router){
     Route::put('orders/{id}/update', [OrderController::class, 'update']);
     Route::get('orders/get', [OrderController::class, 'get']);
     Route::get('orders/getFornecedor', [OrderController::class, 'getFornecedor']);
+    Route::get('orders/getAnalista', [OrderController::class, 'getAnalista']);
 
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);

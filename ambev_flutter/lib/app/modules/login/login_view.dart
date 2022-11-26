@@ -2,7 +2,6 @@ import 'package:ambev_flutter/app/global/widgets/rounded_button.dart';
 import 'package:ambev_flutter/app/global/widgets/rounded_input_field.dart';
 import 'package:ambev_flutter/app/global/widgets/rounded_password_field.dart';
 import 'package:ambev_flutter/app/modules/login/login_controller.dart';
-import 'package:ambev_flutter/app/modules/login/widgets/already_have_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

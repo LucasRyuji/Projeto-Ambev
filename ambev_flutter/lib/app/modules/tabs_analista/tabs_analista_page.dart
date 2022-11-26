@@ -1,4 +1,5 @@
 import 'package:ambev_flutter/app/global/helpers/app_colors.dart';
+import 'package:ambev_flutter/app/modules/orders-analista/index/orders_analista_view.dart';
 import 'package:ambev_flutter/app/modules/profile/profile_view.dart';
 import 'package:ambev_flutter/app/modules/tabs_analista/tabs_analista_controller.dart';
 import 'package:ambev_flutter/app/modules/users/index/users_view.dart';
@@ -22,6 +23,10 @@ class TabsAnalistaPage extends GetView<TabsAnalistaController> {
             type: BottomNavigationBarType.fixed,
             items: const [
               BottomNavigationBarItem(
+                icon: FaIcon(FontAwesomeIcons.ticket),
+                label: 'Pedidos',
+              ),
+              BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.users),
                 label: 'Usuários',
               ),
@@ -39,6 +44,7 @@ class TabsAnalistaPage extends GetView<TabsAnalistaController> {
               () => IndexedStack(
                 index: controller.currentIndex.value,
                 children: [
+                  OrdersAnalistaPage(),
                   UsersPage(),
                   ProfilePage(),
                 ],

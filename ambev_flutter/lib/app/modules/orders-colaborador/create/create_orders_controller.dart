@@ -43,7 +43,7 @@ class CreateOrdersController extends GetxController {
   save() async {
     if (formKey.currentState!.validate()) {
       var order = OrderModel(
-        date: DateFormat('dd/MM/yyyy hh:mm')
+        date: DateFormat('dd/MM/yyyy HH:mm')
             .parse("${dateController.text} ${timeController.text}"),
         origin: originController.text,
         destiny: destinyController.text,

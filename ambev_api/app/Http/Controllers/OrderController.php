@@ -9,7 +9,7 @@ class OrderController extends Controller
 {
     public function get(Request $request)
     {
-        $orders = Order::where('user_id', $request->user_id)->get()->load('status');
+        $orders = Order::where('user_id', $request->user_id)->orderBy('created_at', 'desc')->get()->load('status', 'user');
 
         return response()->json([
             'error' => false,
@@ -19,7 +19,21 @@ class OrderController extends Controller
 
     public function getFornecedor()
     {
-        $orders = Order::where('status_id', 1)->get()->load('user');
+        $orders = Order::where('status_id', 1)->orderBy('created_at', 'desc')->get()->load('user');
+
+        return response()->json([
+            'error' => false,
+            'orders' => $orders
+        ]);
+    }
+
+    public function getAnalista(Request $request)
+    {
+        if ($request->type == 'pending') {
+            $orders = Order::where('status_id', 2)->orderBy('created_at', 'desc')->get()->load('user', 'status');
+        } else {
+            $orders = Order::whereIn('status_id', [3, 4])->orderBy('created_at', 'desc')->get()->load('user', 'status');
+        }
 
         return response()->json([
             'error' => false,

@@ -1,5 +1,11 @@
+import 'package:ambev_flutter/app/modules/order-details-analista/order_details_analista_binding.dart';
+import 'package:ambev_flutter/app/modules/order-details-analista/order_details_analista_view.dart';
+import 'package:ambev_flutter/app/modules/order-details-colaborador/order_details_colaborador_binding.dart';
+import 'package:ambev_flutter/app/modules/order-details-colaborador/order_details_colaborador_view.dart';
 import 'package:ambev_flutter/app/modules/order-details-fornecedor/order_details_fornecedor_binding.dart';
 import 'package:ambev_flutter/app/modules/order-details-fornecedor/order_details_fornecedor_view.dart';
+import 'package:ambev_flutter/app/modules/orders-analista/index/orders_analista_binding.dart';
+import 'package:ambev_flutter/app/modules/orders-analista/index/orders_analista_view.dart';
 import 'package:ambev_flutter/app/modules/orders-colaborador/create/create_orders_binding.dart';
 import 'package:ambev_flutter/app/modules/orders-colaborador/create/create_orders_view.dart';
 import 'package:ambev_flutter/app/modules/orders-colaborador/index/orders_colaborador_binding.dart';
@@ -71,6 +77,11 @@ class AppPages {
       binding: OrdersColaboradorBinding(),
     ),
     GetPage(
+      name: Routes.ORDERS_ANALISTA,
+      page: () => OrdersAnalistaPage(),
+      binding: OrdersAnalistaBinding(),
+    ),
+    GetPage(
       name: Routes.CREATE_ORDER,
       page: () => CreateOrdersPage(),
       binding: CreateOrdersBinding(),
@@ -79,6 +90,16 @@ class AppPages {
       name: Routes.ORDER_FORNECEDOR,
       page: () => OrderDetailsFornecedorPage(),
       binding: OrderDetailsFornecedorBinding(),
+    ),
+    GetPage(
+      name: Routes.ORDER_ANALISTA,
+      page: () => OrderDetailsAnalistaPage(),
+      binding: OrderDetailsAnalistaBinding(),
+    ),
+    GetPage(
+      name: Routes.ORDER_COLABORADOR,
+      page: () => OrderDetailsColaboradorPage(),
+      binding: OrderDetailsColaboradorBinding(),
     ),
   ];
 }

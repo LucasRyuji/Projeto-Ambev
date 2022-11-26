@@ -1,13 +1,12 @@
-import 'package:ambev_flutter/app/global/helpers/app_colors.dart';
 import 'package:ambev_flutter/app/global/helpers/app_styles.dart';
-import 'package:ambev_flutter/app/modules/order-details-fornecedor/order_details_fornecedor_controller.dart';
+import 'package:ambev_flutter/app/modules/order-details-colaborador/order_details_colaborador_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class OrderDetailsFornecedorPage
-    extends GetView<OrderDetailsFornecedorController> {
+class OrderDetailsColaboradorPage
+    extends GetView<OrderDetailsColaboradorController> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,6 +28,22 @@ class OrderDetailsFornecedorPage
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Text(
+                          'Status',
+                          style: TextStyle(
+                            color: Color(0xff6C6C6C),
+                          ),
+                        ),
+                        TextFormField(
+                          enabled: false,
+                          readOnly: true,
+                          initialValue: controller.order.status!.name,
+                          decoration: AppStyles.inputDecoration,
+                          keyboardType: TextInputType.datetime,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         const Text(
                           'Colaborador',
                           style: TextStyle(
@@ -55,7 +70,7 @@ class OrderDetailsFornecedorPage
                           enabled: false,
                           readOnly: true,
                           initialValue: DateFormat('dd/MM/yyyy')
-                                          .format(controller.order.date),
+                              .format(controller.order.date),
                           decoration: AppStyles.inputDecoration,
                           keyboardType: TextInputType.datetime,
                         ),
@@ -71,7 +86,8 @@ class OrderDetailsFornecedorPage
                         TextFormField(
                           enabled: false,
                           readOnly: true,
-                          initialValue: DateFormat('HH:mm').format(controller.order.date),
+                          initialValue:
+                              DateFormat('HH:mm').format(controller.order.date),
                           decoration: AppStyles.inputDecoration,
                           keyboardType: TextInputType.datetime,
                         ),
@@ -167,7 +183,9 @@ class OrderDetailsFornecedorPage
                           ),
                         ),
                         TextFormField(
-                          controller: controller.carController,
+                          enabled: false,
+                          readOnly: true,
+                          initialValue: controller.order.car,
                           decoration: AppStyles.inputDecoration,
                           keyboardType: TextInputType.text,
                           validator: (value) {
@@ -187,7 +205,9 @@ class OrderDetailsFornecedorPage
                           ),
                         ),
                         TextFormField(
-                          controller: controller.driverController,
+                          enabled: false,
+                          readOnly: true,
+                          initialValue: controller.order.driver,
                           decoration: AppStyles.inputDecoration,
                           keyboardType: TextInputType.text,
                           validator: (value) {
@@ -207,6 +227,8 @@ class OrderDetailsFornecedorPage
                           ),
                         ),
                         TextFormField(
+                          readOnly: true,
+                          enabled: false,
                           controller: controller.valueController,
                           decoration: AppStyles.inputDecoration,
                           keyboardType: TextInputType.number,
@@ -216,58 +238,6 @@ class OrderDetailsFornecedorPage
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          controller.save();
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          height: 40,
-                          width: MediaQuery.of(context).size.width - 40,
-                          child: Center(
-                              child: Obx(
-                            () => Stack(
-                              children: [
-                                if (controller.loading.isFalse)
-                                  const Text(
-                                    'SALVAR',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                if (controller.loading.isTrue)
-                                  RichText(
-                                    text: TextSpan(
-                                        text: 'AGUARDE ',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        children: [
-                                          WidgetSpan(
-                                            alignment:
-                                                PlaceholderAlignment.middle,
-                                            child:
-                                                LoadingAnimationWidget.inkDrop(
-                                              color: Colors.white,
-                                              size: 16,
-                                            ),
-                                          )
-                                        ]),
-                                  )
-                              ],
-                            ),
-                          )),
-                        ),
-                      )
-                    ],
                   ),
                   const SizedBox(
                     height: 50,

@@ -2,9 +2,9 @@
     package="com.example.ambev_flutter">
    <application
    
-        android:label="ambev_flutter"
+        android:label="Ambev"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

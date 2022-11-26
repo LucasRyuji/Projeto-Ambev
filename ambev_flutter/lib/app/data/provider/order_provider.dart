@@ -57,6 +57,30 @@ class OrderApiClient {
     }
   }
 
+  Future<Map<String, dynamic>?> getAnalista(String type) async {
+    try {
+      var uri = Uri.parse("$baseUrl/orders/getAnalista?type=$type");
+      var response = await client.get(uri);
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        Helpers.toast(
+          title: 'Erro',
+          message: 'Ocorreu um erro, tente novamente mais tarde.',
+          backgroundColor: Colors.redAccent,
+        );
+      }
+    } catch (e) {
+      print(e);
+      Helpers.toast(
+        title: 'Erro',
+        message: 'Ocorreu um erro inesperado.',
+        backgroundColor: Colors.redAccent,
+      );
+    }
+  }
+
   Future<Map<String, dynamic>?> store(OrderModel order) async {
     try {
       var uri = Uri.parse("$baseUrl/orders/store");

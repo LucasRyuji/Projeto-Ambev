@@ -1,136 +1,149 @@
 import 'package:ambev_flutter/app/global/helpers/app_colors.dart';
-import 'package:ambev_flutter/app/modules/orders-colaborador/index/orders_colaborador_controller.dart';
+import 'package:ambev_flutter/app/modules/orders-analista/index/orders_analista_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletons/skeletons.dart';
 
-class OrdersColaboradorPage extends GetView<OrdersColaboradorController> {
+class OrdersAnalistaPage extends GetView<OrdersAnalistaController> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('PEDIDOS'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                controller.refreshOrders();
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text('PEDIDOS'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  controller.refreshOrders();
+                },
+                icon: const Icon(Icons.refresh),
+              ),
+            ],
+            bottom: TabBar(
+              labelColor: Colors.white,
+              onTap: (int value) {
+                if (value == 0) {
+                  controller.type = 'pending';
+                  controller.getOrders();
+                }
+                if (value == 1) {
+                  controller.type = 'aceitos';
+                  controller.getOrders();
+                }
               },
-              icon: const Icon(Icons.refresh),
+              tabs: const [
+                Tab(
+                  text: 'PENDENTES',
+                ),
+                Tab(
+                  text: 'ACEITOS/CANCELADOS',
+                ),
+              ],
             ),
-            IconButton(
-              onPressed: () {
-                controller.create();
-              },
-              icon: const Icon(Icons.add_box),
-            )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Obx(
-              () => Stack(
-                children: [
-                  if (controller.loading.isTrue)
-                    Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
-                            height: 100,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8),
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Obx(
+                () => Stack(
+                  children: [
+                    if (controller.loading.isTrue)
+                      Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
-                            height: 100,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8),
+                          SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              height: 100,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
-                            height: 100,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8),
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
-                            height: 100,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8),
+                          SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              height: 100,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
-                            height: 100,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8),
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
-                            height: 100,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8),
+                          SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              height: 100,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  if (controller.loading.isFalse)
-                    Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ListView.builder(
-                          itemCount: controller.orders.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          itemBuilder: ((_, index) {
-                            var order = controller.orders[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: InkWell(
-                                onTap: () {
-                                  Get.toNamed('order-details-colaborador',
-                                      arguments: {
-                                        'order': order,
-                                      });
-                                },
-                                child: Card(
-                                  color: Colors.grey.shade200,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              height: 100,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              height: 100,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              height: 100,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ],
+                      ),
+                    if (controller.loading.isFalse)
+                      Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ListView.builder(
+                            itemCount: controller.orders.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            itemBuilder: ((_, index) {
+                              var order = controller.orders[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.updateOrder(order);
+                                  },
+                                  child: Card(
+                                    color: Colors.grey.shade200,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Padding(
                                       padding: const EdgeInsets.all(20),
                                       child: Row(
                                         mainAxisAlignment:
@@ -139,7 +152,7 @@ class OrdersColaboradorPage extends GetView<OrdersColaboradorController> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           SizedBox(
-                                            width: (width) * 0.15,
+                                            width: width * 0.15,
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -207,11 +220,11 @@ class OrdersColaboradorPage extends GetView<OrdersColaboradorController> {
                                             ),
                                           ),
                                           SizedBox(
-                                            width: (width) * 0.3,
+                                            width: width * 0.3,
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                      horizontal: 10),
+                                                      horizontal: 20),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -228,34 +241,36 @@ class OrdersColaboradorPage extends GetView<OrdersColaboradorController> {
                                                     height: 10,
                                                   ),
                                                   const Text(
-                                                    'Status do pedido',
+                                                    'Colaborador',
                                                     style: TextStyle(
                                                       color: AppColors.medium,
                                                       fontSize: 12,
                                                     ),
                                                   ),
-                                                  Text(order.status!.name!),
+                                                  Text(order.user!.name!),
                                                 ],
                                               ),
                                             ),
                                           ),
                                         ],
-                                      )),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            );
-                          }),
-                        ),
-                        if (controller.orders.isEmpty)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text('Nenhum pedido encontrado.'),
-                            ],
-                          )
-                      ],
-                    ),
-                ],
+                              );
+                            }),
+                          ),
+                          if (controller.orders.isEmpty)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text('Nenhum pedido encontrado.'),
+                              ],
+                            )
+                        ],
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
