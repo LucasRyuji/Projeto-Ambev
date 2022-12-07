@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 
 void main() async {
   await GetStorage.init();
@@ -18,6 +19,7 @@ void main() async {
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate,
+      MonthYearPickerLocalizations.delegate,
     ],
     supportedLocales: const [Locale('pt', 'BR')],
   ));

@@ -49,8 +49,10 @@ class OrderRepository {
     return orders;
   }
 
-  Future<List<OrderModel>> getAnalista (String type) async {
-    var response = await api.getAnalista(type);
+  Future<List<OrderModel>> getAnalista (String type, {
+    String? date,
+  }) async {
+    var response = await api.getAnalista(type, date: date);
     var orders = <OrderModel>[];
 
 

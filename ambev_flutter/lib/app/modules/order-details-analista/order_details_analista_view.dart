@@ -239,112 +239,119 @@ class OrderDetailsAnalistaPage extends GetView<OrderDetailsAnalistaController> {
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          controller.save('aprovar');
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          height: 40,
-                          width: MediaQuery.of(context).size.width - 40,
-                          child: Center(
-                              child: Obx(
-                            () => Stack(
-                              children: [
-                                if (controller.loading.isFalse)
-                                  const Text(
-                                    'APROVAR',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                if (controller.loading.isTrue)
-                                  RichText(
-                                    text: TextSpan(
-                                        text: 'AGUARDE ',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
+                  Visibility(
+                    visible: controller.order.statusId != 4,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                controller.save('aprovar');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                height: 40,
+                                width: MediaQuery.of(context).size.width - 40,
+                                child: Center(
+                                    child: Obx(
+                                  () => Stack(
+                                    children: [
+                                      if (controller.loading.isFalse)
+                                        const Text(
+                                          'APROVAR',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                        children: [
-                                          WidgetSpan(
-                                            alignment:
-                                                PlaceholderAlignment.middle,
-                                            child:
-                                                LoadingAnimationWidget.inkDrop(
-                                              color: Colors.white,
-                                              size: 16,
-                                            ),
-                                          )
-                                        ]),
-                                  )
-                              ],
-                            ),
-                          )),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          controller.save('cancelar');
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          height: 40,
-                          width: MediaQuery.of(context).size.width - 40,
-                          child: Center(
-                              child: Obx(
-                            () => Stack(
-                              children: [
-                                if (controller.loading.isFalse)
-                                  const Text(
-                                    'CANCELAR',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                      if (controller.loading.isTrue)
+                                        RichText(
+                                          text: TextSpan(
+                                              text: 'AGUARDE ',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              children: [
+                                                WidgetSpan(
+                                                  alignment:
+                                                      PlaceholderAlignment.middle,
+                                                  child: LoadingAnimationWidget
+                                                      .inkDrop(
+                                                    color: Colors.white,
+                                                    size: 16,
+                                                  ),
+                                                )
+                                              ]),
+                                        )
+                                    ],
                                   ),
-                                if (controller.loading.isTrue)
-                                  RichText(
-                                    text: TextSpan(
-                                        text: 'AGUARDE ',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        children: [
-                                          WidgetSpan(
-                                            alignment:
-                                                PlaceholderAlignment.middle,
-                                            child:
-                                                LoadingAnimationWidget.inkDrop(
-                                              color: Colors.white,
-                                              size: 16,
-                                            ),
-                                          )
-                                        ]),
-                                  )
-                              ],
-                            ),
-                          )),
+                                )),
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                controller.save('cancelar');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                height: 40,
+                                width: MediaQuery.of(context).size.width - 40,
+                                child: Center(
+                                    child: Obx(
+                                  () => Stack(
+                                    children: [
+                                      if (controller.loading.isFalse)
+                                        const Text(
+                                          'CANCELAR',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      if (controller.loading.isTrue)
+                                        RichText(
+                                          text: TextSpan(
+                                              text: 'AGUARDE ',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              children: [
+                                                WidgetSpan(
+                                                  alignment:
+                                                      PlaceholderAlignment.middle,
+                                                  child: LoadingAnimationWidget
+                                                      .inkDrop(
+                                                    color: Colors.white,
+                                                    size: 16,
+                                                  ),
+                                                )
+                                              ]),
+                                        )
+                                    ],
+                                  ),
+                                )),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 50,

@@ -29,10 +29,31 @@ class OrderController extends Controller
 
     public function getAnalista(Request $request)
     {
+        if ($request->date != null) {
+            $date_month = explode('-', $request->date)[1];
+            $first_date = date($request->date);
+            $last_date = date('Y-' . $date_month . '-t');
+        }
         if ($request->type == 'pending') {
-            $orders = Order::where('status_id', 2)->orderBy('created_at', 'desc')->get()->load('user', 'status');
+            $orders = Order::where('status_id', 2);
+
+            if (isset($first_date) && isset($last_date)) {
+                $orders = $orders->whereBetween('created_at', [$first_date, $last_date]);
+            }
+
+            $orders = $orders->orderBy('created_at', 'desc')
+            ->get()
+            ->load('user', 'status');
         } else {
-            $orders = Order::whereIn('status_id', [3, 4])->orderBy('created_at', 'desc')->get()->load('user', 'status');
+            $orders = Order::whereIn('status_id', [3, 4]);
+
+            if ($first_date && isset($fisrt_date) && $last_date && isset($last_date)) {
+                $orders = $orders->whereBetween('created_at', [$first_date, $last_date]);
+            }
+
+            $orders = $orders->orderBy('created_at', 'desc')
+            ->get()
+            ->load('user', 'status');
         }
 
         return response()->json([

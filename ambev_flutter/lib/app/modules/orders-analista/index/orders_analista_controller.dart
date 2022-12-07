@@ -6,11 +6,15 @@ import 'package:ambev_flutter/app/global/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 
 class OrdersAnalistaController extends GetxController {
   var loading = true.obs;
   var ordersRepository = OrderRepository();
   User? user;
+  DateTime? date;
+
+  var dateController = TextEditingController();
 
   String type = 'pending';
 
@@ -45,7 +49,11 @@ class OrdersAnalistaController extends GetxController {
 
   getOrders() async {
     loading.value = true;
-    orders = await ordersRepository.getAnalista(type);
+    String? date;
+    if (this.date != null) {
+      date = DateFormat('yyyy-MM-dd').format(this.date!);
+    }
+    orders = await ordersRepository.getAnalista(type, date: date);
     loading.value = false;
   }
 

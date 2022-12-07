@@ -57,9 +57,11 @@ class OrderApiClient {
     }
   }
 
-  Future<Map<String, dynamic>?> getAnalista(String type) async {
+  Future<Map<String, dynamic>?> getAnalista(String type, {
+    String? date,
+  }) async {
     try {
-      var uri = Uri.parse("$baseUrl/orders/getAnalista?type=$type");
+      var uri = Uri.parse("$baseUrl/orders/getAnalista?type=$type&date=${date ?? ''}");
       var response = await client.get(uri);
 
       if (response.statusCode == 200) {

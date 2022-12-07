@@ -9,7 +9,8 @@ class AuthApiClient {
 
   Future<Map<String, dynamic>> login(String username, String password) async {
     try {
-      var response = await http.post(Uri.parse(baseUrl + '/login'), body: {
+      var uri = Uri.parse(baseUrl + '/login');
+      var response = await http.post(uri, body: {
         "username": username,
         "password": password,
       });
